@@ -166,7 +166,7 @@ endif()
 
 
 set(MEGA_ZLIB_VER "1.2.12")
-set(MEGA_LUA51_VER "5.1.5")
+set(MEGA_LUA_VER "5.4.6")
 set(MEGA_LUAJIT_VER "2.1.0-e826d0c")
 set(MEGA_LIBOGG_VER "1.3.2")
 set(MEGA_LIBVORBIS_VER "1.3.5")
@@ -192,10 +192,11 @@ add_subdirectory("libs/zlib-${MEGA_ZLIB_VER}" ${CMAKE_BINARY_DIR}/zlib)
 set(MEGA_ZLIB zlibstatic)
 
 message(STATUS "-----------------------------------------------------")
-message(STATUS "Configuring: lua ${MEGA_LUA51_VER}")
+message(STATUS "Configuring: lua ${MEGA_LUA_VER}")
 message(STATUS "-----------------------------------------------------")
-add_subdirectory("libs/lua-${MEGA_LUA51_VER}" ${CMAKE_BINARY_DIR}/lua51)
-set(MEGA_LUA51 lua51)
+add_subdirectory("libs/lua-${MEGA_LUA_VER}" ${CMAKE_BINARY_DIR}/lua)
+set(MEGA_LUA lua)
+set(MEGA_LUA51 lua)#for compatibility
 
 message(STATUS "-----------------------------------------------------")
 message(STATUS "Configuring: libogg ${MEGA_LIBOGG_VER}")
@@ -288,7 +289,7 @@ endif()
 
 set(MEGA_3P
 	${MEGA_ZLIB}
-	${MEGA_LUA51}
+	${MEGA_LUA}
 	${MEGA_LIBOGG}
 	${MEGA_LIBVORBIS}
 	${MEGA_LIBVORBISFILE}
@@ -304,6 +305,10 @@ set(MEGA_3P
 # Set to directory of love source. Defaults to ./libs/love.
 if(NOT MEGA_LOVE)
 	set(MEGA_LOVE ${CMAKE_CURRENT_SOURCE_DIR}/libs/love)
+endif()
+
+if(NOT EXISTS ${MEGA_LOVE}/CMakeLists.txt)
+	set(MEGA_LOVE ${CMAKE_CURRENT_SOURCE_DIR}/../love)
 endif()
 
 if(EXISTS ${MEGA_LOVE}/CMakeLists.txt)
@@ -331,4 +336,4 @@ target_link_libraries(megatest ${MEGA_3P})
 add_move_dll(megatest ${MEGA_MPEG123})
 add_move_dll(megatest ${MEGA_SDL2})
 add_move_dll(megatest ${MEGA_OPENAL})
-add_move_dll(megatest ${MEGA_LUA51})
+add_move_dll(megatest ${MEGA_LUA})
