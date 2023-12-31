@@ -1,3 +1,5 @@
+Change 1 : Lua版本提升至5.4.6
+
 Megasource is a CMake-buildable collection of all [LÖVE][love2d] dependencies.
 
 It is currently only officially supported on Windows, but may also work on macOS. It could certainly also work on Linux, but good package managers makes megasource less relevant there.
