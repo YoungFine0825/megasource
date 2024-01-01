@@ -195,3 +195,6 @@
 /* #undef uintptr_t */
 
 #define REAL_IS_FLOAT
+
+//For building on macos
+#define HAVE_DIRENT_H 1
